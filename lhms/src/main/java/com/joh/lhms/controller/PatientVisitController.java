@@ -25,8 +25,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.joh.lhms.domain.model.JsonResponse;
 import com.joh.lhms.exception.CusDataIntegrityViolationException;
+import com.joh.lhms.model.Examination;
 import com.joh.lhms.model.Patient;
 import com.joh.lhms.model.PatientVisit;
+import com.joh.lhms.service.ExaminationService;
 import com.joh.lhms.service.PatientService;
 import com.joh.lhms.service.PatientVisitService;
 import com.joh.lhms.validator.PatientVisitValidation;
@@ -42,6 +44,9 @@ public class PatientVisitController {
 
 	@Autowired
 	private PatientVisitService patientVisitService;
+
+	@Autowired
+	private ExaminationService examinationService;
 
 	@GetMapping()
 	public String getAllPatientVisit(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date from,
@@ -73,6 +78,10 @@ public class PatientVisitController {
 
 		PatientVisit patientVisit = new PatientVisit();
 		patientVisit.setPatient(patient);
+
+		Iterable<Examination> examinations = examinationService.findAll();
+
+		model.addAttribute("jsonExaminations", mapper.writeValueAsString(examinations));
 
 		model.addAttribute("jsonPatientVisit", mapper.writeValueAsString(patientVisit));
 

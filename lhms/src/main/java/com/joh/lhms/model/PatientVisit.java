@@ -53,12 +53,13 @@ public class PatientVisit {
 	@Max(value = 1, message = "maximum discountAmount is 1")
 	private BigDecimal discountAmount;
 
-	@Column(name = "DISCOUNT_TYPE")
-	private String discountType;
+	@ManyToOne()
+	@JoinColumn(name = "I_DISCOUNT_TYPE")
+	private DiscountType discountType;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "I_PATIENT_VISIT")
-	private List<Radiography> radiographies = new ArrayList<>();
+	private List<PatientExamination> patientExaminations = new ArrayList<>();
 
 	@Column(name = "NOTE")
 	private String note;
@@ -95,6 +96,14 @@ public class PatientVisit {
 		this.totalPayment = totalPayment;
 	}
 
+	public Double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
 	public BigDecimal getDiscountAmount() {
 		return discountAmount;
 	}
@@ -103,20 +112,20 @@ public class PatientVisit {
 		this.discountAmount = discountAmount;
 	}
 
-	public String getDiscountType() {
+	public DiscountType getDiscountType() {
 		return discountType;
 	}
 
-	public void setDiscountType(String discountType) {
+	public void setDiscountType(DiscountType discountType) {
 		this.discountType = discountType;
 	}
 
-	public List<Radiography> getRadiographies() {
-		return radiographies;
+	public List<PatientExamination> getPatientExaminations() {
+		return patientExaminations;
 	}
 
-	public void setRadiographies(List<Radiography> radiographies) {
-		this.radiographies = radiographies;
+	public void setPatientExaminations(List<PatientExamination> patientExaminations) {
+		this.patientExaminations = patientExaminations;
 	}
 
 	public String getNote() {
@@ -126,20 +135,14 @@ public class PatientVisit {
 	public void setNote(String note) {
 		this.note = note;
 	}
-
-	public Double getTotalPrice() {
-		return totalPrice;
-	}
-
-	public void setTotalPrice(Double totalPrice) {
-		this.totalPrice = totalPrice;
-	}
+	
+	
 
 	@Override
 	public String toString() {
 		return "PatientVisit [id=" + id + ", patient=" + patient + ", time=" + time + ", totalPayment=" + totalPayment
 				+ ", totalPrice=" + totalPrice + ", discountAmount=" + discountAmount + ", discountType=" + discountType
-				+ ", radiographies=" + radiographies + ", note=" + note + "]";
+				+ ", patientExaminations=" + patientExaminations + ", note=" + note + "]";
 	}
 
 }

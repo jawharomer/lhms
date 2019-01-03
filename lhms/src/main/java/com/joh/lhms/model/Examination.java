@@ -33,7 +33,7 @@ public class Examination {
 	private ExaminationGroup examinationGroup;
 
 	@NotBlank(message = "Code is required")
-	@Column(name = "code", unique = true)
+	@Column(name = "CODE", unique = true)
 	private String code;
 
 	@NotBlank(message = "Name is required")
@@ -41,7 +41,7 @@ public class Examination {
 	private String name;
 
 	@NotNull(message = "Price is required")
-	@Column(name = "price")
+	@Column(name = "PRICE")
 	private Double price;
 
 	@Column(name = "NOTE", length = 255)
