@@ -13,11 +13,6 @@
 <div id="add-patient-visit-contaner" ng-app="addPatientVisit"
 	ng-controller="addPatientVisit" ng-init="init()">
 
-	<span class="text-info">{{mrRebinModel}} </span> <br> Type Here <input
-		ng-model="mrRebinModel.firstName"> <input
-		ng-model="mrRebinModel.lastName">
-
-	<button ng-click="showMe()">BTn</button>
 	<table>
 		<tr>
 			<td>Patient</td>
@@ -25,9 +20,6 @@
 			<td>{{patientVisit.patient.fullName}} <a
 				href="<c:url value="/patients/edit/"/>{{patientVisit.patient.id}} "
 				class="btn btn-sm btn-warning"> <i class="fa fa-edit"></i>
-			</a> <a
-				href="<c:url value="/patientVisits/patient/"/>{{patientVisit.patient.id}} "
-				class="btn btn-sm btn-warning"> <i class="fa fa-history"></i>
 			</a>
 			</td>
 		</tr>
