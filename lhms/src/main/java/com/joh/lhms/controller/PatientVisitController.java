@@ -64,7 +64,7 @@ public class PatientVisitController {
 		model.addAttribute("from", from);
 		model.addAttribute("to", to);
 
-		return "allPatientVisits";
+		return "patientVisits";
 	}
 
 	@GetMapping(path = "/add/{patientId}")
@@ -119,7 +119,10 @@ public class PatientVisitController {
 		ObjectMapper mapper = new ObjectMapper();
 
 		PatientVisit patientVisit = patientVisitService.findOne(id);
-		logger.info("patientVisit=" + patientVisit);
+
+		Iterable<Examination> examinations = examinationService.findAll();
+
+		model.addAttribute("jsonExaminations", mapper.writeValueAsString(examinations));
 
 		model.addAttribute("jsonPatientVisit", mapper.writeValueAsString(patientVisit));
 
@@ -140,7 +143,6 @@ public class PatientVisitController {
 			ObjectMapper mapper = new ObjectMapper();
 
 			model.addAttribute("jsonPatientVisit", mapper.writeValueAsString(patientVisit));
-			// model.addAttribute("jsonDoctors", mapper.writeValueAsString(doctors));
 
 			return "editPatientVisit";
 
@@ -148,6 +150,32 @@ public class PatientVisitController {
 			patientVisitService.save(patientVisit);
 			return "success";
 		}
+
+	}
+
+	@GetMapping(path = "/payment/{id}")
+	public String getAddingPaymentPatientVisit(@PathVariable int id, Model model) {
+		logger.info("getAddingPaymentPatientVisit->fired");
+		logger.info("id=" + id);
+
+		PatientVisit patientVisit = patientVisitService.findOne(id);
+
+		model.addAttribute("patientVisit", patientVisit);
+
+		return "patientVisit/addVisitPayment";
+	}
+
+	@PostMapping(path = "/payment")
+	public String addPaymentPatientVisit(@RequestBody @Valid PatientVisit patientVisit, BindingResult result,
+			Model model, HttpServletResponse response) throws JsonProcessingException {
+		logger.info("addPaymentPatientVisit->fired");
+		logger.info("patientVisit=" + patientVisit);
+
+		PatientVisit orginalPatientVisit = patientVisitService.findOne(patientVisit.getId());
+
+		orginalPatientVisit.setTotalPayment(patientVisit.getTotalPayment());
+		patientVisitService.save(orginalPatientVisit);
+		return "success";
 
 	}
 

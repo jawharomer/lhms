@@ -24,8 +24,9 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
-@Table(name = "XHMS_PATIENT_VISITS")
+@Table(name = "LHMS_PATIENT_VISITS")
 public class PatientVisit {
+	
 
 	@Column(name = "I_PATIENT_VISIT")
 	@Id
@@ -42,7 +43,7 @@ public class PatientVisit {
 	@ColumnDefault("CURRENT_TIMESTAMP")
 	private Date time;
 
-	@Column(name = "TOTAL_PAYMENT", nullable = false)
+	@Column(name = "TOTAL_PAYMENT")
 	private Double totalPayment;
 
 	@Column(name = "TOTAL_PRICE")
@@ -63,6 +64,9 @@ public class PatientVisit {
 
 	@Column(name = "NOTE")
 	private String note;
+	
+	@Column(name = "DONE")
+	private boolean done;
 
 	public Integer getId() {
 		return id;
@@ -138,11 +142,19 @@ public class PatientVisit {
 	
 	
 
+	public boolean isDone() {
+		return done;
+	}
+
+	public void setDone(boolean done) {
+		this.done = done;
+	}
+
 	@Override
 	public String toString() {
 		return "PatientVisit [id=" + id + ", patient=" + patient + ", time=" + time + ", totalPayment=" + totalPayment
 				+ ", totalPrice=" + totalPrice + ", discountAmount=" + discountAmount + ", discountType=" + discountType
-				+ ", patientExaminations=" + patientExaminations + ", note=" + note + "]";
+				+ ", patientExaminations=" + patientExaminations + ", note=" + note + ", done=" + done + "]";
 	}
 
 }

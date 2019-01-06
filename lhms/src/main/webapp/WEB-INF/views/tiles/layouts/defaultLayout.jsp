@@ -43,9 +43,6 @@ body {
 
 </head>
 <body>
-
-
-
 	<section id="view-port">
 
 		<header id="header">

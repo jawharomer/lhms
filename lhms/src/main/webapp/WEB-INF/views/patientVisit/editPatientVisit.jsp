@@ -10,7 +10,8 @@
 </script>
 
 
-<div id="add-patient-visit-contaner">
+<div id="add-patient-visit-contaner" ng-app="addPatientVisit"
+	ng-controller="addPatientVisit" ng-init="init()">
 
 	<table>
 		<tr>
@@ -142,9 +143,13 @@
 			
 			</textarea>
 	</div>
+	<div>
+		isDone:<input type="checkbox" ng-model="patientVisit.done"
+			value="true">
+	</div>
 	<div class="p-1">
-		<button class="btn btn-success" ng-click="save()">
-			<i class="fa fa-save"></i>
+		<button class="btn btn-warning" ng-click="save()">
+			<i class="fa fa-edit"></i>
 		</button>
 	</div>
 

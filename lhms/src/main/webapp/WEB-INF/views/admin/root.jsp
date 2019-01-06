@@ -24,6 +24,10 @@
 					Patients</a></li>
 
 			<li class="list-group-item"><a
+				href="<c:url value="/patientVisits"/>?from=${currentDate}&to=${tomorrow}">
+					Patient Visits</a></li>
+
+			<li class="list-group-item"><a
 				href="<c:url value="/examinationGroups"/>"> ExaminationGroups</a></li>
 
 
