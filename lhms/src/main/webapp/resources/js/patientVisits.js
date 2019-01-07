@@ -8,6 +8,31 @@ $(document).ready()
 		dateFormat : "yy-mm-dd"
 	}).datepicker("setDate", $("#to").val());
 
+	var table = $('#patient-visits-table').DataTable({
+		paginate : false,
+		dom : 'Bfrtip',
+		buttons : [ {
+			extend : "excel",
+			messageTop : reportTitle,
+			filename : reportTitle,
+			charset : 'UTF-8',
+			className : "btn btn-sm  btn-outline-info",
+			exportOptions : {
+				columns : ':not(.cus-not-export)'
+			}
+		}, {
+			extend : "csv",
+			messageTop : reportTitle,
+			filename : reportTitle,
+			charset : 'UTF-8',
+			className : "btn btn-sm btn-outline-info",
+			exportOptions : {
+				columns : ':not(.cus-not-export)'
+			}
+		} ],
+		bInfo : false
+	});
+
 }
 
 function getAddingPayment(id) {

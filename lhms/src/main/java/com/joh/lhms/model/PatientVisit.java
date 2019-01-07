@@ -26,7 +26,6 @@ import org.hibernate.annotations.CreationTimestamp;
 @Entity
 @Table(name = "LHMS_PATIENT_VISITS")
 public class PatientVisit {
-	
 
 	@Column(name = "I_PATIENT_VISIT")
 	@Id
@@ -46,9 +45,6 @@ public class PatientVisit {
 	@Column(name = "TOTAL_PAYMENT")
 	private Double totalPayment;
 
-	@Column(name = "TOTAL_PRICE")
-	private Double totalPrice;
-
 	@Column(name = "DISCOUNT_AMOUNT")
 	@Min(value = 0, message = "minimum discountAmount is 0")
 	@Max(value = 1, message = "maximum discountAmount is 1")
@@ -64,7 +60,7 @@ public class PatientVisit {
 
 	@Column(name = "NOTE")
 	private String note;
-	
+
 	@Column(name = "DONE")
 	private boolean done;
 
@@ -100,14 +96,6 @@ public class PatientVisit {
 		this.totalPayment = totalPayment;
 	}
 
-	public Double getTotalPrice() {
-		return totalPrice;
-	}
-
-	public void setTotalPrice(Double totalPrice) {
-		this.totalPrice = totalPrice;
-	}
-
 	public BigDecimal getDiscountAmount() {
 		return discountAmount;
 	}
@@ -139,8 +127,6 @@ public class PatientVisit {
 	public void setNote(String note) {
 		this.note = note;
 	}
-	
-	
 
 	public boolean isDone() {
 		return done;
@@ -153,8 +139,8 @@ public class PatientVisit {
 	@Override
 	public String toString() {
 		return "PatientVisit [id=" + id + ", patient=" + patient + ", time=" + time + ", totalPayment=" + totalPayment
-				+ ", totalPrice=" + totalPrice + ", discountAmount=" + discountAmount + ", discountType=" + discountType
-				+ ", patientExaminations=" + patientExaminations + ", note=" + note + ", done=" + done + "]";
+				+ ", discountAmount=" + discountAmount + ", discountType=" + discountType + ", patientExaminations="
+				+ patientExaminations + ", note=" + note + ", done=" + done + "]";
 	}
 
 }

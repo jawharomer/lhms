@@ -1,11 +1,18 @@
 package com.joh.lhms.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
+import org.apache.commons.beanutils.converters.BigDecimalConverter;
+import org.hibernate.engine.transaction.jta.platform.internal.BitronixJtaPlatform;
 
 @Entity
 @Table(name = "DISCOUNT_TYPES")
@@ -19,8 +26,10 @@ public class DiscountType {
 	@Column(name = "DISCOUNT_TYPE_NAME")
 	private String name;
 
+	@Min(0)
+	@Max(1)
 	@Column(name = "DISCOUNT_TYPE_LIMIT")
-	private Double limit;
+	private BigDecimal limit;
 
 	@Column(name = "FIX", columnDefinition = "TINYINT(1)")
 	private boolean fix;
@@ -41,11 +50,11 @@ public class DiscountType {
 		this.name = name;
 	}
 
-	public Double getLimit() {
+	public BigDecimal getLimit() {
 		return limit;
 	}
 
-	public void setLimit(Double limit) {
+	public void setLimit(BigDecimal limit) {
 		this.limit = limit;
 	}
 

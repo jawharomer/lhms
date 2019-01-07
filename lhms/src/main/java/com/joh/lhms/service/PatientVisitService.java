@@ -17,4 +17,10 @@ public interface PatientVisitService {
 
 	void delete(int id);
 
+
+	PatientVisit payment(PatientVisit patientVisit);
+
+
+	PatientVisit update(PatientVisit patientVisit);
+
 }

@@ -25,9 +25,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.joh.lhms.domain.model.JsonResponse;
 import com.joh.lhms.exception.CusDataIntegrityViolationException;
+import com.joh.lhms.model.DiscountType;
 import com.joh.lhms.model.Examination;
 import com.joh.lhms.model.Patient;
 import com.joh.lhms.model.PatientVisit;
+import com.joh.lhms.service.DiscountTypeService;
 import com.joh.lhms.service.ExaminationService;
 import com.joh.lhms.service.PatientService;
 import com.joh.lhms.service.PatientVisitService;
@@ -47,6 +49,9 @@ public class PatientVisitController {
 
 	@Autowired
 	private ExaminationService examinationService;
+
+	@Autowired
+	private DiscountTypeService discountTypeService;
 
 	@GetMapping()
 	public String getAllPatientVisit(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date from,
@@ -147,22 +152,42 @@ public class PatientVisitController {
 			return "editPatientVisit";
 
 		} else {
-			patientVisitService.save(patientVisit);
+			patientVisitService.update(patientVisit);
 			return "success";
 		}
 
 	}
 
 	@GetMapping(path = "/payment/{id}")
-	public String getAddingPaymentPatientVisit(@PathVariable int id, Model model) {
-		logger.info("getAddingPaymentPatientVisit->fired");
+	public String getAddingVisitPayment(@PathVariable int id, Model model) throws JsonProcessingException {
+		logger.info("getAddingVisitPayment->fired");
+		logger.info("id=" + id);
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		PatientVisit patientVisit = patientVisitService.findOne(id);
+
+		Iterable<DiscountType> discountTypes = discountTypeService.findAll();
+
+		model.addAttribute("jsonPatientVisit", mapper.writeValueAsString(patientVisit));
+
+		model.addAttribute("jsonDiscountTypes", mapper.writeValueAsString(discountTypes));
+
+		return "addVisitPayment";
+
+	}
+
+	@GetMapping(path = "/payment/{id}/print")
+	public String getPrintVisitPayment(@PathVariable int id, Model model) {
+		logger.info("getPrintVisitPayment->fired");
 		logger.info("id=" + id);
 
 		PatientVisit patientVisit = patientVisitService.findOne(id);
 
 		model.addAttribute("patientVisit", patientVisit);
 
-		return "patientVisit/addVisitPayment";
+		return "printVisitPayment";
+
 	}
 
 	@PostMapping(path = "/payment")
@@ -170,11 +195,7 @@ public class PatientVisitController {
 			Model model, HttpServletResponse response) throws JsonProcessingException {
 		logger.info("addPaymentPatientVisit->fired");
 		logger.info("patientVisit=" + patientVisit);
-
-		PatientVisit orginalPatientVisit = patientVisitService.findOne(patientVisit.getId());
-
-		orginalPatientVisit.setTotalPayment(patientVisit.getTotalPayment());
-		patientVisitService.save(orginalPatientVisit);
+		patientVisitService.payment(patientVisit);
 		return "success";
 
 	}

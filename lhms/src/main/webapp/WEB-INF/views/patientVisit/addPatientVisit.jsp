@@ -9,8 +9,8 @@
 	var jsonExaminations = '<spring:escapeBody  javaScriptEscape="true">${jsonExaminations}</spring:escapeBody>';
 </script>
 
-
-<div id="add-patient-visit-contaner">
+<div id="add-patient-visit-contaner" ng-app="addPatientVisit"
+	ng-controller="addPatientVisit" ng-init="init()">
 
 	<table>
 		<tr>

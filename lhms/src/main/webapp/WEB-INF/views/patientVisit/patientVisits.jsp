@@ -51,11 +51,12 @@
 				<th>T-Payment</th>
 				<th>T-Unpaid</th>
 				<th>IsDone</th>
-				<th>F</th>
+				<th class="cus-not-export">F</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:set var="sumTotalPayment" value="${0}" />
+			<c:set var="sumTotalPrice" value="${0}" />
 
 			<c:forEach items="${patientVisits}" var="item">
 				<tr>
@@ -67,17 +68,16 @@
 					<c:forEach items="${item.patientExaminations}" var="eItem">
 						<c:set var="totalPrice" value="${totalPrice+eItem.price}" />
 					</c:forEach>
-					<td><fmt:formatNumber maxFractionDigits="3">${totalPrice}</fmt:formatNumber>
-					</td>
-					<td>
-						<button class="btn btn-sm btn-info"
-							onclick="getAddingPayment(${item.id})">
-							<i class="fa fa-money"></i>
-						</button> <fmt:formatNumber maxFractionDigits="3">
+					<td><c:set var="sumTotalPrice"
+							value="${sumTotalPricet+totalPrice}" /> <fmt:formatNumber
+							maxFractionDigits="3">${totalPrice}</fmt:formatNumber></td>
+					<td><a class="btn btn-sm btn-info" target="_blank"
+						href="<c:url value="/patientVisits/payment/" />${item.id}"> <i
+							class="fa fa-money"></i>
+					</a> <fmt:formatNumber maxFractionDigits="3">
 					${item.totalPayment}
 					</fmt:formatNumber> <c:set var="sumTotalPayment"
-							value="${sumTotalPayment+item.totalPayment}" />
-					</td>
+							value="${sumTotalPayment+item.totalPayment}" /></td>
 					<td><fmt:formatNumber maxFractionDigits="3">
 					${totalPrice-totalPayment}
 					</fmt:formatNumber></td>
@@ -99,13 +99,20 @@
 					</td>
 
 				</tr>
+				<tr class="text-info">
+					<td>Total</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td><fmt:formatNumber maxFractionDigits="3"> ${sumTotalPrice}
+	</fmt:formatNumber></td>
+					<td><fmt:formatNumber maxFractionDigits="3"> ${sumTotalPayment}
+	</fmt:formatNumber></td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	<div class="p-1">
-		Sum Total Payment :
-		<fmt:formatNumber maxFractionDigits="3"> ${sumTotalPayment}
-	</fmt:formatNumber>
-	</div>
 
 </div>
