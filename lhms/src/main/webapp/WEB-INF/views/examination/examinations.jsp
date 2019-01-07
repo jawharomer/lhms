@@ -9,9 +9,10 @@
 <div>
 	<div class="py-2">
 		<h3>Examinations</h3>
-		<button class="btn btn-success" onclick="getAddingExaminationGroup()">
+
+		<a href="<c:url value="/examinations/add" />" class="btn btn-success">
 			<i class="fa fa-plus"></i>
-		</button>
+		</a>
 
 	</div>
 

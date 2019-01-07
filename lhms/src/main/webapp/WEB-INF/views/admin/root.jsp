@@ -28,7 +28,10 @@
 					Patient Visits</a></li>
 
 			<li class="list-group-item"><a
-				href="<c:url value="/examinationGroups"/>"> ExaminationGroups</a></li>
+				href="<c:url value="/examinationGroups"/>">ExaminationGroups</a></li>
+
+			<li class="list-group-item"><a
+				href="<c:url value="/examinations"/>">Examinations</a></li>
 
 
 			<li class="list-group-item"><a

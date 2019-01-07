@@ -80,7 +80,9 @@
 				<td><input readonly="readonly"
 					ng-model="selectedExamination.upper"
 					class="form-control form-control-sm"></td>
-				<td><input ng-model="patientExamination.result" required
+				<td><input type="number" ng-min="selectedExamination.lower"
+					ng-max="selectedExamination.upper"
+					ng-model="patientExamination.result" required
 					class="form-control form-control-sm"></td>
 			</tr>
 			<!-- E-Normal -->
@@ -143,7 +145,9 @@
 			</textarea>
 	</div>
 	<div class="p-1">
-		<button class="btn btn-success" ng-click="save()">
+		<button class="btn btn-success"
+			ng-disabled="patientVisit.patientExaminations.length<1"
+			ng-click="save()">
 			<i class="fa fa-save"></i>
 		</button>
 	</div>

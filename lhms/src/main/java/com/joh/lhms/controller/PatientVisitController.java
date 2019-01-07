@@ -158,6 +158,18 @@ public class PatientVisitController {
 
 	}
 
+	@GetMapping(path = "/print/{id}")
+	public String getPrintingPatientVisit(@PathVariable int id, Model model) {
+		logger.info("getPrintingPatientVisit->fired");
+		logger.info("id=" + id);
+
+		PatientVisit patientVisit = patientVisitService.findOne(id);
+
+		model.addAttribute("patientVisit", patientVisit);
+
+		return "printPatientVisit";
+	}
+
 	@GetMapping(path = "/payment/{id}")
 	public String getAddingVisitPayment(@PathVariable int id, Model model) throws JsonProcessingException {
 		logger.info("getAddingVisitPayment->fired");

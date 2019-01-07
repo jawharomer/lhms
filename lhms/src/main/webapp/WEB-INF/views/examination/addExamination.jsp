@@ -88,11 +88,11 @@
 
 		<tr>
 			<td>Note</td>
-			<td><textarea name="note" class="form-control form-control-sm"
+			<td><textarea style="max-width: 200px; height: 200px"
+					maxlength="255" name="note" class="form-control form-control-sm"
 					ng-model="examination.note">
 				</textarea></td>
 		</tr>
-
 
 
 	</table>

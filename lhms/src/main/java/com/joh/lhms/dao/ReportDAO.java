@@ -24,7 +24,7 @@ public class ReportDAO {
 		// Notification-1
 
 		Query query = em.createNativeQuery(
-				"SELECT COUNT(*) FROM XHMS_PATIENT_VISITS WHERE VISIT_TIME BETWEEN CURDATE() AND CURDATE()+INTERVAL 1 DAY;");
+				"SELECT COUNT(*) FROM LHMS_PATIENT_VISITS WHERE VISIT_TIME BETWEEN CURDATE() AND CURDATE()+INTERVAL 1 DAY;");
 
 		Object totalPatientVisitResult = query.getSingleResult();
 
@@ -45,7 +45,7 @@ public class ReportDAO {
 		// Notification-2
 
 		query = em.createNativeQuery(
-				"SELECT IFNULL(SUM(TOTAL_PAYMENT),0) FROM XHMS_PATIENT_VISITS  WHERE VISIT_TIME BETWEEN CURDATE() AND CURDATE()+INTERVAL 1 DAY;");
+				"SELECT IFNULL(SUM(TOTAL_PAYMENT),0) FROM LHMS_PATIENT_VISITS  WHERE VISIT_TIME BETWEEN CURDATE() AND CURDATE()+INTERVAL 1 DAY;");
 
 		Object toatlTodayPaymentResult = query.getSingleResult();
 

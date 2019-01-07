@@ -85,7 +85,11 @@
 					<td>${item.done}</td>
 					<td>
 						<div>
-							<a class="btn btn-sm btn-warning"
+
+							<a class="btn btn-sm btn-info"
+								href="<c:url value="/patientVisits/print/"/>${item.id}"> <i
+								class="fa fa-print"></i>
+							</a> <a class="btn btn-sm btn-warning"
 								href="<c:url value="/patientVisits/edit/"/>${item.id}"> <i
 								class="fa fa-edit"></i>
 							</a>

@@ -277,6 +277,18 @@
 		</put-list-attribute>
 	</definition>
 
+	<!-- Print PatientVisit -->
+	<definition name="printPatientVisit" extends="adminRoot">
+		<put-attribute name="title" value="Print PatientVisit" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/patientVisit/printPatientVisit.jsp"
+			cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="printPatientVisit" />
+		</put-list-attribute>
+	</definition>
+
 
 	<!--Add VisitPayment -->
 	<definition name="addVisitPayment" extends="adminRoot">
@@ -293,6 +305,8 @@
 			<add-attribute value="addVisitPayment" />
 		</put-list-attribute>
 	</definition>
+
+
 
 	<!--Print VisitPayment -->
 	<definition name="printVisitPayment" extends="adminRoot">
